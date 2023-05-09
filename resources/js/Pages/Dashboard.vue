@@ -23,10 +23,11 @@ const form = useForm({
     company: '',
     contact: '',
     subject: '',
-    owner: '',
     assignto: '',
     duedate: '',
-    reminder: '',
+    duetime: '',
+    reminderdate: '',
+    remindertime: '',
     priority: '',
     detail: '',
 });
@@ -56,7 +57,11 @@ const closeModal = () => {
  * Add Item
  */
 const onInsertItem = () => {
-
+    form.post(route('todo.create'), {
+        preserveScroll: true,
+        onSuccess: () => form.reset(),
+        onError: () => {},
+    });
 }
  
 
@@ -146,7 +151,7 @@ const onDeleteItem = () => {
                                 </div>
                               </div>
                             
-                            <form class="w-full p-6">
+                            <form @submit.prevent="onInsertItem" class="w-full p-6">
                                 <div class="md:flex md:items-center mb-6">
                                   <div class="md:w-1/3">
                                     <label class="block font-bold md:text-left mb-1 md:mb-0 pr-4" for="tasktype">
@@ -154,9 +159,9 @@ const onDeleteItem = () => {
                                     </label>
                                   </div>
                                   <div class="md:w-2/3">
-                                    <select name="tasktype" id="tasktype" class="border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500">
+                                    <select v-model="form.tasktype" name="tasktype" id="tasktype" class="border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500">
                                         <option value="todo">Todo</option>
-                                        <option value="processing">Processing</option>
+                                        <option value="inprogress">In Progress</option>
                                         <option value="done">Done</option>
                                     </select>
                                   </div>
@@ -168,7 +173,7 @@ const onDeleteItem = () => {
                                         </label>
                                     </div>
                                     <div class="md:w-2/3">
-                                        <input name="company"  id="company"  class="border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" type="text" value="">
+                                        <input v-model="form.company" name="company"  id="company"  class="border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" type="text">
                                     </div>
                                 </div>
                                 <div class="md:flex md:items-center mb-6">
@@ -178,7 +183,7 @@ const onDeleteItem = () => {
                                     </label>
                                   </div>
                                   <div class="md:w-2/3">
-                                    <input id="contact" class="border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"  type="text" value="">
+                                    <input v-model="form.contact" name="contact" id="contact" class="border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"  type="text">
                                   </div>
                                 </div>
                                 <div class="md:flex md:items-center mb-6">
@@ -188,7 +193,7 @@ const onDeleteItem = () => {
                                     </label>
                                   </div>
                                   <div class="md:w-2/3">
-                                    <input name="subject" id="subject" class="border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"  type="text" value="">
+                                    <input v-model="form.subject" name="subject" id="subject" class="border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"  type="text">
                                   </div>
                                 </div>
                                 <div class="md:flex md:items-center mb-6">
@@ -198,7 +203,7 @@ const onDeleteItem = () => {
                                       </label>
                                     </div>
                                     <div class="md:w-2/3">
-                                      <select name="assignto" id="assignto" class="border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500">
+                                      <select v-model="form.assignto" name="assignto" id="assignto" class="border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500">
                                           <option value="4">Administrator</option>
                                       </select>
                                     </div>
@@ -210,17 +215,31 @@ const onDeleteItem = () => {
                                       </label>
                                     </div>
                                     <div class="md:w-2/3">
-                                      <input name="duedate" id="duedate" class="border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" type="text" value="">
+                                        <div class="md:flex md:items-center ">
+                                            <div class="md:w-1/2 mr-1">
+                                                <input v-model="form.duedate" name="duedate" id="duedate" class="border-gray-200 rounded w-full text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" type="date">
+                                            </div>
+                                            <div class="md:w-1/2 ml-1">
+                                                <input v-model="form.duetime" name="duetime" id="duetime" class="border-gray-200 rounded w-full text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" type="time">
+                                            </div>
+                                        </div>
                                     </div>
                                   </div>                                  
                                   <div class="md:flex md:items-center mb-6">
                                     <div class="md:w-1/3">
-                                      <label class="block font-bold md:text-left mb-1 md:mb-0 pr-4" for="reminder">
+                                      <label class="block font-bold md:text-left mb-1 md:mb-0 pr-4" for="reminderdate">
                                         Set Remender
                                       </label>
                                     </div>
                                     <div class="md:w-2/3">
-                                      <input name="reminder" id="reminder" class="border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" type="text" value="">
+                                        <div class="md:flex md:items-center ">
+                                            <div class="md:w-1/2 mr-1">
+                                                <input v-model="form.reminderdate" name="reminderdate" id="reminderdate" class="border-gray-200 rounded w-full text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" type="date">
+                                            </div>
+                                            <div class="md:w-1/2 ml-1">
+                                                <input v-model="form.remindertime" name="remindertime" id="remindertime" class="border-gray-200 rounded w-full text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" type="time">
+                                            </div>
+                                        </div>
                                     </div>
                                   </div>                                  
                                   <div class="md:flex md:items-center mb-6">
@@ -230,7 +249,7 @@ const onDeleteItem = () => {
                                       </label>
                                     </div>
                                     <div class="md:w-2/3">
-                                      <select name="priority" id="priority" class="border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500">
+                                      <select v-model="form.priority" name="priority" id="priority" class="border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500">
                                           <option value="low">Low</option>
                                           <option value="medium">Medium</option>
                                           <option value="high">High</option>
@@ -246,7 +265,7 @@ const onDeleteItem = () => {
                                     </label>
                                   </div>
                                   <div class="md:w-2/3">
-                                    <textarea name="detail" id="detail" rows="5" class="border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"></textarea>
+                                    <textarea v-model="form.detail" name="detail" id="detail" rows="5" class="border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"></textarea>
                                   </div>
                                 </div>
                                 

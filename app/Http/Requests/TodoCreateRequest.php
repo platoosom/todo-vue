@@ -27,12 +27,9 @@ class TodoCreateRequest extends FormRequest
             'company' => ['required', 'string'],
             'contact' => ['required', 'string', 'max:255'],
             'subject' => ['required', 'string', 'max:255'],
-            'owner' => ['required', 'integer'],
             'assignto' => ['required', 'integer'],
             'duedate' => ['required', 'date'],
-            'reminder' => ['required', 'date'],
             'priority' => ['required', 'string', Rule::in(['low', 'medium', 'high'])],
-            'detail' => ['required'],
         ];
     }
 }

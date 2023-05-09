@@ -9,6 +9,7 @@ use App\Http\Requests\TodoCreateRequest;
 use App\Http\Requests\TodoUpdateRequest;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Requests\TodoDestroyRequest;
+use Illuminate\Support\Facades\Auth;
 
 class TodoController extends Controller
 {
@@ -20,9 +21,22 @@ class TodoController extends Controller
     }
 
 
-    public function create(TodoCreateRequest $request)
+    public function create(Request $request)
     {
-        return Todo::create($request);
+        $todo = new Todo();
+        $todo->tasktype = $request->tasktype;
+        $todo->company = $request->company;
+        $todo->contact = $request->contact;
+        $todo->subject = $request->subject;
+        $todo->owner = Auth()->user()->id;
+        $todo->assignto = $request->assignto;
+        $todo->duedate = $request->duedate;
+        $todo->reminder = $request->reminder;
+        $todo->priority = $request->priority;
+        $todo->detail = $request->detail;
+        $todo->save();
+
+        return Redirect::route('dashboard');
     }
 
 
