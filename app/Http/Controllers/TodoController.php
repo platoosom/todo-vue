@@ -7,6 +7,7 @@ use Inertia\Inertia;
 use Illuminate\Http\Request;
 use App\Http\Requests\TodoCreateRequest;
 use App\Http\Requests\TodoUpdateRequest;
+use Illuminate\Support\Facades\Redirect;
 use App\Http\Requests\TodoDestroyRequest;
 
 class TodoController extends Controller
@@ -47,6 +48,7 @@ class TodoController extends Controller
 
     public function destroy(TodoDestroyRequest $request)
     {
-        return Todo::destroy($request->id);
+       Todo::destroy($request->id);
+       return Redirect::route('dashboard');
     }
 }
