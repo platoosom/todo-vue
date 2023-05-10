@@ -49,9 +49,9 @@ const checkedItem = (e) => {
                     <td class="whitespace-nowrap px-6 py-4 font-medium"><input type="checkbox" :value="todo.id" @change="checkedItem" /></td>
                     <td class="whitespace-nowrap px-6 py-4">{{ todo.created_at }}</td>
                     <td class="whitespace-nowrap px-6 py-4">{{ todo.subject }}</td>
-                    <td class="whitespace-nowrap px-6 py-4">{{ todo.owner }}</td>
+                    <td class="whitespace-nowrap px-6 py-4">{{ todo.owner.name }}</td>
                     <td class="whitespace-nowrap px-6 py-4">{{ todo.company }}</td>
-                    <td class="whitespace-nowrap px-6 py-4">{{ todo.assignto }}</td>
+                    <td class="whitespace-nowrap px-6 py-4">{{ todo.assignto?.name }}</td>
                     <td class="whitespace-nowrap px-6 py-4">{{ todo.duedate }}</td>
                     <td class="whitespace-nowrap px-6 py-4">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
