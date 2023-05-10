@@ -30,8 +30,8 @@ class TodoController extends Controller
         $todo->subject = $request->subject;
         $todo->owner = Auth()->user()->id;
         $todo->assignto = $request->assignto;
-        $todo->duedate = $request->duedate;
-        $todo->reminder = $request->reminder;
+        $todo->duedate = $request->duedate.' '.$request->duetime;
+        $todo->reminder = $request->reminderdate.' '.$request->remindertime;
         $todo->priority = $request->priority;
         $todo->detail = $request->detail;
         $todo->save();

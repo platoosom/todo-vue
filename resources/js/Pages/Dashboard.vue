@@ -9,7 +9,7 @@ import Modal from '@/Components/Modal.vue';
 /**
  * Props
  */
-defineProps({
+const props = defineProps({
     userType: {
         type: String,
     },
@@ -38,13 +38,29 @@ const form = useForm({
 const store = reactive({
     checkedItem: null,
     openModal: false,
+    openDetailModal: false,
+    tasktype: null,
+    company: null,
+    contact: null,
+    subject: null,
+    assignto: null,
+    duedate: null,
+    reminder: null,
+    priority: null,
+    detail: null,
 })
 
 /**
  * Events
  */ 
-const onCheckedItem = (id) => {
-    store.checkedItem = id
+const onCheckedItem = (i) => {
+
+    if(i.value <= 0){
+      clearStore()
+      return
+    }
+
+    setStore(i.value);
 };
 const openModal = () => {
     store.openModal = true;
@@ -52,6 +68,40 @@ const openModal = () => {
 const closeModal = () => {
     store.openModal = false;
 };
+const openDetailModal = () => {
+    store.openDetailModal = true;
+};
+const closeDetailModal = () => {
+    store.openDetailModal = false;
+};
+const clearStore = () => {
+    store.checkedItem = null 
+    store.tasktype = null 
+    store.company = null
+    store.contact = null
+    store.subject = null
+    store.assignto = null
+    store.duedate = null
+    store.reminder = null
+    store.priority = null
+    store.detail = null
+}
+const setStore = (id) => {
+    store.checkedItem = id
+    const todo = props.todoes.find( (t) => t.id == id);
+
+    // Set store
+    store.tasktype = todo.tasktype
+    store.company = todo.company
+    store.contact = todo.contact
+    store.subject = todo.subject
+    store.assignto = todo.assignto
+    store.duedate = todo.duedate
+    store.reminder = todo.reminder
+    store.priority = todo.priority
+    store.detail = todo.detail
+}
+
 
 /**
  * Add Item
@@ -99,18 +149,17 @@ const onDeleteItem = () => {
                                   </svg>
                                 <span>New Task</span>
                               </button>
-                            <button class="bg-neutral-100 hover:bg-neutral-300 text-gray-800 font-bold py-2 px-4 mx-2  inline-flex items-center">
+                            <button :disabled="!store.checkedItem" class="disabled:opacity-25 disabled:cursor-not-allowed bg-neutral-100 hover:bg-neutral-300 text-gray-800 font-bold py-2 px-4 mx-2  inline-flex items-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
                                   </svg>
                                   
                                 <span>Edit</span>
                               </button>
-                            <button class="bg-neutral-100 hover:bg-neutral-300 text-gray-800 font-bold py-2 px-4 mx-2  inline-flex items-center">
+                            <button @click="openDetailModal" :disabled="!store.checkedItem" class="disabled:opacity-25 disabled:cursor-not-allowed bg-neutral-100 hover:bg-neutral-300 text-gray-800 font-bold py-2 px-4 mx-2  inline-flex items-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" />
                                   </svg>
-                                  
                                 <span>Detail</span>
                               </button>
                             <button @click="onDeleteItem" :disabled="!store.checkedItem" class="disabled:opacity-25 disabled:cursor-not-allowed bg-red-100 hover:bg-red-300 text-red-800 font-bold py-2 px-4 mx-2  inline-flex items-center">
@@ -134,8 +183,6 @@ const onDeleteItem = () => {
 
                     <Modal :show="store.openModal" @close="closeModal">
                         <div class="">
-                            
-                            
                             <div class="md:flex md:items-center px-6 py-3 border-b">
                                 <div class="md:w-1/3">
                                     <h2 class="text-lg font-medium text-gray-900">
@@ -285,9 +332,136 @@ const onDeleteItem = () => {
                                   </div>
                                 </div>
                               </form>
-            
-                             
-             
+                        </div>
+                    </Modal>
+
+                    <!-- Detail Dialog -->
+                    <Modal :show="store.openDetailModal" @close="closeDetailModal">
+                        <div class="">
+                            <div class="md:flex md:items-center px-6 py-3 border-b">
+                                <div class="md:w-1/3">
+                                    <h2 class="text-lg font-medium text-gray-900">
+                                        Task Details 
+                                    </h2>
+                                </div>
+                                <div class="md:w-2/3 text-gray-500 ">
+                                    <button @click="closeDetailModal" class="float-right">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                          </svg>
+                                    </button>
+                                </div>
+                              </div>
+                            
+                              <div class="md:flex md:items-center mb-6">
+                                <div class="md:w-1/3">
+                                  <span class="block font-bold md:text-left mb-1 md:mb-0 pr-4">
+                                    Task Type
+                                  </span>
+                                </div>
+                                <div class="md:w-2/3">
+                                  <span class="block font-bold md:text-left mb-1 md:mb-0 pr-4">
+                                    {{ store.tasktype }}
+                                  </span>
+                                </div>
+                              </div>
+                              <div class="md:flex md:items-center mb-6">
+                                  <div class="md:w-1/3">
+                                      <span class="block font-bold md:text-left mb-1 md:mb-0 pr-4">
+                                          Company
+                                      </span>
+                                  </div>
+                                  <div class="md:w-2/3">
+                                    <span class="block font-bold md:text-left mb-1 md:mb-0 pr-4">
+                                      {{ store.company }}
+                                    </span>
+                                  </div>
+                              </div>
+                              <div class="md:flex md:items-center mb-6">
+                                <div class="md:w-1/3">
+                                  <span class="block font-bold md:text-left mb-1 md:mb-0 pr-4">
+                                    Contact
+                                  </span>
+                                </div>
+                                <div class="md:w-2/3">
+                                  <span class="block font-bold md:text-left mb-1 md:mb-0 pr-4">
+                                    {{ store.contact }}
+                                  </span>
+                                </div>
+                              </div>
+                              <div class="md:flex md:items-center mb-6">
+                                <div class="md:w-1/3">
+                                  <span class="block font-bold md:text-left mb-1 md:mb-0 pr-4">
+                                    Subject/Objective
+                                  </span>
+                                </div>
+                                <div class="md:w-2/3">
+                                  <span class="block font-bold md:text-left mb-1 md:mb-0 pr-4">
+                                    {{ store.subject }}
+                                  </span>
+                                </div>
+                              </div>
+                              <div class="md:flex md:items-center mb-6">
+                                  <div class="md:w-1/3">
+                                    <span class="block font-bold md:text-left mb-1 md:mb-0 pr-4">
+                                      Assigned To
+                                    </span>
+                                  </div>
+                                  <div class="md:w-2/3">
+                                    <span class="block font-bold md:text-left mb-1 md:mb-0 pr-4">
+                                      {{ store.assignto }}
+                                    </span>
+                                  </div>
+                                </div>
+                                <div class="md:flex md:items-center mb-6">
+                                  <div class="md:w-1/3">
+                                    <span class="block font-bold md:text-left mb-1 md:mb-0 pr-4">
+                                      Due Date
+                                    </span>
+                                  </div>
+                                  <div class="md:w-2/3">
+                                    <span class="block font-bold md:text-left mb-1 md:mb-0 pr-4">
+                                      {{ store.duedate }}
+                                    </span>
+                                  </div>
+                                </div>                                  
+                                <div class="md:flex md:items-center mb-6">
+                                  <div class="md:w-1/3">
+                                    <span class="block font-bold md:text-left mb-1 md:mb-0 pr-4">
+                                      Set Remender
+                                    </span>
+                                  </div>
+                                  <div class="md:w-2/3">
+                                    <span class="block font-bold md:text-left mb-1 md:mb-0 pr-4">
+                                      {{ store.reminder }}
+                                    </span>
+                                  </div>
+                                </div>                                  
+                                <div class="md:flex md:items-center mb-6">
+                                  <div class="md:w-1/3">
+                                    <span class="block font-bold md:text-left mb-1 md:mb-0 pr-4">
+                                      Priority
+                                    </span>
+                                  </div>
+                                  <div class="md:w-2/3">
+                                    <span class="block font-bold md:text-left mb-1 md:mb-0 pr-4">
+                                      {{ store.priority }}
+                                    </span>
+                                  </div>
+                                </div>
+
+                              <div class="md:flex md:items-center mb-6">
+                                <div class="md:w-1/3">
+                                  <span class="block font-bold md:text-left mb-1 md:mb-0 pr-4">
+                                      Details 
+                                  </span>
+                                </div>
+                                <div class="md:w-2/3">
+                                  <span class="block font-bold md:text-left mb-1 md:mb-0 pr-4">
+                                    {{ store.detail }} 
+                                  </span>
+                                </div>
+                              </div>
                         </div>
                     </Modal>
 

@@ -14,6 +14,13 @@ class Todo extends Model
 
     protected $with = ['owner', 'assignto'];
 
+    protected $casts = [
+        'created_at'  => 'datetime:d M Y - H:i',
+        'updated_at'  => 'datetime:d M Y - H:i',
+        'duedate' => 'date:d M Y',
+        'reminder' => 'date:d M Y',
+    ];
+
     public function owner()
     {
         return $this->hasOne(User::class, 'id', 'owner');
