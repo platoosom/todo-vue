@@ -355,96 +355,96 @@ const onDeleteItem = () => {
                             
                               <div class="md:flex md:items-center mb-6">
                                 <div class="md:w-1/3">
-                                  <span class="block font-bold md:text-left mb-1 md:mb-0 pr-4">
+                                  <span class="block font-bold md:text-left mb-1 md:mb-0 px-6 py-2">
                                     Task Type
                                   </span>
                                 </div>
                                 <div class="md:w-2/3">
-                                  <span class="block font-bold md:text-left mb-1 md:mb-0 pr-4">
+                                  <span class="block text-gray-500 md:text-left mb-1 md:mb-0 px-6 py-2">
                                     {{ store.tasktype }}
                                   </span>
                                 </div>
                               </div>
                               <div class="md:flex md:items-center mb-6">
                                   <div class="md:w-1/3">
-                                      <span class="block font-bold md:text-left mb-1 md:mb-0 pr-4">
+                                      <span class="block font-bold  md:text-left mb-1 md:mb-0 px-6 py-2">
                                           Company
                                       </span>
                                   </div>
                                   <div class="md:w-2/3">
-                                    <span class="block font-bold md:text-left mb-1 md:mb-0 pr-4">
+                                    <span class="block text-gray-500 md:text-left mb-1 md:mb-0 px-6 py-2">
                                       {{ store.company }}
                                     </span>
                                   </div>
                               </div>
                               <div class="md:flex md:items-center mb-6">
                                 <div class="md:w-1/3">
-                                  <span class="block font-bold md:text-left mb-1 md:mb-0 pr-4">
+                                  <span class="block font-bold md:text-left mb-1 md:mb-0 px-6 py-2">
                                     Contact
                                   </span>
                                 </div>
                                 <div class="md:w-2/3">
-                                  <span class="block font-bold md:text-left mb-1 md:mb-0 pr-4">
+                                  <span class="block text-gray-500 md:text-left mb-1 md:mb-0 px-6 py-2">
                                     {{ store.contact }}
                                   </span>
                                 </div>
                               </div>
                               <div class="md:flex md:items-center mb-6">
                                 <div class="md:w-1/3">
-                                  <span class="block font-bold md:text-left mb-1 md:mb-0 pr-4">
+                                  <span class="block font-bold md:text-left mb-1 md:mb-0 px-6 py-2">
                                     Subject/Objective
                                   </span>
                                 </div>
                                 <div class="md:w-2/3">
-                                  <span class="block font-bold md:text-left mb-1 md:mb-0 pr-4">
+                                  <span class="block text-gray-500 md:text-left mb-1 md:mb-0 px-6 py-2">
                                     {{ store.subject }}
                                   </span>
                                 </div>
                               </div>
                               <div class="md:flex md:items-center mb-6">
                                   <div class="md:w-1/3">
-                                    <span class="block font-bold md:text-left mb-1 md:mb-0 pr-4">
+                                    <span class="block font-bold md:text-left mb-1 md:mb-0 px-6 py-2">
                                       Assigned To
                                     </span>
                                   </div>
                                   <div class="md:w-2/3">
-                                    <span class="block font-bold md:text-left mb-1 md:mb-0 pr-4">
+                                    <span class="block text-gray-500 md:text-left mb-1 md:mb-0 px-6 py-2">
                                       {{ store.assignto }}
                                     </span>
                                   </div>
                                 </div>
                                 <div class="md:flex md:items-center mb-6">
                                   <div class="md:w-1/3">
-                                    <span class="block font-bold md:text-left mb-1 md:mb-0 pr-4">
+                                    <span class="block font-bold md:text-left mb-1 md:mb-0 px-6 py-2">
                                       Due Date
                                     </span>
                                   </div>
                                   <div class="md:w-2/3">
-                                    <span class="block font-bold md:text-left mb-1 md:mb-0 pr-4">
+                                    <span class="block text-gray-500 md:text-left mb-1 md:mb-0 px-6 py-2">
                                       {{ store.duedate }}
                                     </span>
                                   </div>
                                 </div>                                  
                                 <div class="md:flex md:items-center mb-6">
                                   <div class="md:w-1/3">
-                                    <span class="block font-bold md:text-left mb-1 md:mb-0 pr-4">
+                                    <span class="block font-bold md:text-left mb-1 md:mb-0 px-6 py-2">
                                       Set Remender
                                     </span>
                                   </div>
                                   <div class="md:w-2/3">
-                                    <span class="block font-bold md:text-left mb-1 md:mb-0 pr-4">
+                                    <span class="block text-gray-500 md:text-left mb-1 md:mb-0 px-6 py-2">
                                       {{ store.reminder }}
                                     </span>
                                   </div>
                                 </div>                                  
                                 <div class="md:flex md:items-center mb-6">
                                   <div class="md:w-1/3">
-                                    <span class="block font-bold md:text-left mb-1 md:mb-0 pr-4">
+                                    <span class="block font-bold md:text-left mb-1 md:mb-0 px-6 py-2">
                                       Priority
                                     </span>
                                   </div>
                                   <div class="md:w-2/3">
-                                    <span class="block font-bold md:text-left mb-1 md:mb-0 pr-4">
+                                    <span class="block text-gray-500 md:text-left mb-1 md:mb-0 px-6 py-2">
                                       {{ store.priority }}
                                     </span>
                                   </div>
@@ -452,12 +452,12 @@ const onDeleteItem = () => {
 
                               <div class="md:flex md:items-center mb-6">
                                 <div class="md:w-1/3">
-                                  <span class="block font-bold md:text-left mb-1 md:mb-0 pr-4">
+                                  <span class="block font-bold md:text-left mb-1 md:mb-0 px-6 py-2">
                                       Details 
                                   </span>
                                 </div>
                                 <div class="md:w-2/3">
-                                  <span class="block font-bold md:text-left mb-1 md:mb-0 pr-4">
+                                  <span class="block text-gray-500 md:text-left mb-1 md:mb-0 px-6 py-2">
                                     {{ store.detail }} 
                                   </span>
                                 </div>
