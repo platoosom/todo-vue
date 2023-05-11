@@ -210,7 +210,7 @@ const onDeleteItem = () => {
                                     </label>
                                   </div>
                                   <div class="md:w-2/3">
-                                    <select v-model="form.tasktype" name="tasktype" id="tasktype" class="border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500">
+                                    <select v-model="form.tasktype" name="tasktype" id="tasktype" class="border-l-rose-500 border-l-4  border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500">
                                         <option value="todo">Todo</option>
                                         <option value="inprogress">In Progress</option>
                                         <option value="done">Done</option>
@@ -224,7 +224,7 @@ const onDeleteItem = () => {
                                         </label>
                                     </div>
                                     <div class="md:w-2/3">
-                                        <input v-model="form.company" name="company"  id="company"  class="border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" type="text">
+                                        <input v-model="form.company" name="company"  id="company"  class="border-l-rose-500 border-l-4 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" type="text">
                                     </div>
                                 </div>
                                 <div class="md:flex md:items-center mb-6">
@@ -234,7 +234,7 @@ const onDeleteItem = () => {
                                     </label>
                                   </div>
                                   <div class="md:w-2/3">
-                                    <input v-model="form.contact" name="contact" id="contact" class="border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"  type="text">
+                                    <input v-model="form.contact" name="contact" id="contact" class="border-l-rose-500 border-l-4 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"  type="text">
                                   </div>
                                 </div>
                                 <div class="md:flex md:items-center mb-6">
@@ -244,7 +244,7 @@ const onDeleteItem = () => {
                                     </label>
                                   </div>
                                   <div class="md:w-2/3">
-                                    <input v-model="form.subject" name="subject" id="subject" class="border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"  type="text">
+                                    <input v-model="form.subject" name="subject" id="subject" class="border-l-rose-500 border-l-4 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"  type="text">
                                   </div>
                                 </div>
                                 <div class="md:flex md:items-center mb-6">
@@ -254,7 +254,7 @@ const onDeleteItem = () => {
                                       </label>
                                     </div>
                                     <div class="md:w-2/3">
-                                      <select v-model="form.assignto" name="assignto" id="assignto" class="border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500">
+                                      <select v-model="form.assignto" name="assignto" id="assignto" class="border-l-rose-500 border-l-4 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500">
                                           <option value="4">Administrator</option>
                                       </select>
                                     </div>
@@ -268,10 +268,10 @@ const onDeleteItem = () => {
                                     <div class="md:w-2/3">
                                         <div class="md:flex md:items-center ">
                                             <div class="md:w-1/2 mr-1">
-                                                <input v-model="form.duedate" name="duedate" id="duedate" class="border-gray-200 rounded w-full text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" type="date">
+                                                <input v-model="form.duedate" name="duedate" id="duedate" class="border-l-rose-500 border-l-4 border-gray-200 rounded w-full text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" type="date">
                                             </div>
                                             <div class="md:w-1/2 ml-1">
-                                                <input v-model="form.duetime" name="duetime" id="duetime" class="border-gray-200 rounded w-full text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" type="time">
+                                                <input v-model="form.duetime" name="duetime" id="duetime" class="border-l-rose-500 border-l-4 border-gray-200 rounded w-full text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" type="time">
                                             </div>
                                         </div>
                                     </div>
@@ -300,7 +300,7 @@ const onDeleteItem = () => {
                                       </label>
                                     </div>
                                     <div class="md:w-2/3">
-                                      <select v-model="form.priority" name="priority" id="priority" class="border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500">
+                                      <select v-model="form.priority" name="priority" id="priority" class="border-l-rose-500 border-l-4 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500">
                                           <option value="low">Low</option>
                                           <option value="medium">Medium</option>
                                           <option value="high">High</option>
