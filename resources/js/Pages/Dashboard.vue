@@ -119,10 +119,14 @@ const onInsertItem = () => {
  * Delete Item event
  */
 const onDeleteItem = () => {
-    if (confirm('Are you sure you want to delete this user?')) {
+    if (confirm('Are you sure you want to delete this task?')) {
         router.delete(
             route("todo.destroy"), 
-            {data: {id: store.checkedItem}, preserveScroll: true}
+            {
+              data: {id: store.checkedItem}, 
+              preserveScroll: true,
+              onSuccess: () => store.checkedItem = null ,
+            }
         );
     }
 }
@@ -137,7 +141,7 @@ const onDeleteItem = () => {
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">Todo Lists</h2>
         </template>
        
-        <div class="py-12">{{ todoes }}
+        <div class="py-12"> 
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm ">
                     <div class="p-6 text-gray-900">
