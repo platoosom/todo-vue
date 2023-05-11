@@ -287,7 +287,15 @@ const onDeleteItem = () => {
                                                 <input v-model="form.duetime" name="duetime" id="duetime" class="border-gray-200 rounded w-full text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" type="time">
                                             </div>
                                         </div>
-                                        <div v-if="form.errors.duedate" class="text-sm text-red-600">{{ form.errors.duedate }}</div>
+                                        <div  v-if="form.errors.duedate || form.errors.duetime"  class="md:flex md:items-center ">
+                                            <div class="md:w-1/2 mr-1">
+                                              <div v-if="form.errors.duedate" class="text-sm text-red-600">{{ form.errors.duedate }}</div>
+                                            </div>
+                                            <div class="md:w-1/2 ml-1">
+                                              <div v-if="form.errors.duetime" class="text-sm text-red-600">{{ form.errors.duetime }}</div>
+                                            </div>
+                                        </div>
+                                        
                                     </div>
                                   </div>                                  
                                   <div class="md:flex md:items-center mb-6">

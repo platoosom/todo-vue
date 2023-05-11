@@ -20,7 +20,9 @@ return new class extends Migration
             $table->bigInteger('owner');
             $table->bigInteger('assignto');
             $table->date('duedate');
+            $table->time('duetime');
             $table->date('reminder')->nullable();
+            $table->time('remindertime')->nullable();
             $table->string('priority', 15);
             $table->text('detail')->nullable();
             $table->timestamps();

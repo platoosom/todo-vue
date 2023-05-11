@@ -29,6 +29,7 @@ class TodoCreateRequest extends FormRequest
             'subject' => ['required', 'string', 'max:255'],
             'assignto' => ['required', 'integer'],
             'duedate' => ['required', 'date'],
+            'duetime' => ['required'],
             'priority' => ['required', 'string', Rule::in(['low', 'medium', 'high'])],
         ];
     }
