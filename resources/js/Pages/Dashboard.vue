@@ -37,8 +37,9 @@ const form = useForm({
  */ 
 const store = reactive({
     checkedItem: null,
-    openModal: false,
+    openFormModal: false,
     openDetailModal: false,
+    openOKModal: false,
     tasktype: null,
     company: null,
     contact: null,
@@ -62,17 +63,24 @@ const onCheckedItem = (i) => {
 
     setStore(i.value);
 };
-const openModal = () => {
-    store.openModal = true;
+const openFormModal = () => {
+    store.openFormModal = true;
 };
 const closeModal = () => {
-    store.openModal = false;
+    store.openFormModal = false;
 };
 const openDetailModal = () => {
     store.openDetailModal = true;
 };
 const closeDetailModal = () => {
     store.openDetailModal = false;
+};
+const openOKModal = () => {
+    store.openOKModal = true;
+};
+const closeOKModal = () => {
+    store.openOKModal = false;
+    store.openFormModal = false;
 };
 const clearStore = () => {
     store.checkedItem = null 
@@ -109,7 +117,7 @@ const setStore = (id) => {
 const onInsertItem = () => {
     form.post(route('todo.create'), {
         preserveScroll: true,
-        onSuccess: () => form.reset(),
+        onSuccess: () => {store.openOKModal = true; form.reset();},
         onError: () => {},
     });
 }
@@ -147,7 +155,7 @@ const onDeleteItem = () => {
                     <div class="p-6 text-gray-900">
 
                         <div class="my-3">
-                            <button @click="openModal" class="bg-neutral-100 hover:bg-neutral-300 text-gray-800 font-bold py-2 px-4 mx-2  inline-flex items-center">
+                            <button @click="openFormModal" class="bg-neutral-100 hover:bg-neutral-300 text-gray-800 font-bold py-2 px-4 mx-2  inline-flex items-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m6-6H6" />
                                   </svg>
@@ -185,7 +193,7 @@ const onDeleteItem = () => {
                         </div>
                     </div>
 
-                    <Modal :show="store.openModal" @close="closeModal">
+                    <Modal :show="store.openFormModal" @close="closeModal">
                         <div class="">
                             <div class="md:flex md:items-center px-6 py-3 border-b">
                                 <div class="md:w-1/3">
@@ -271,7 +279,7 @@ const onDeleteItem = () => {
                                                 <input v-model="form.duedate" name="duedate" id="duedate" class="border-l-rose-500 border-l-4 border-gray-200 rounded w-full text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" type="date">
                                             </div>
                                             <div class="md:w-1/2 ml-1">
-                                                <input v-model="form.duetime" name="duetime" id="duetime" class="border-l-rose-500 border-l-4 border-gray-200 rounded w-full text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" type="time">
+                                                <input v-model="form.duetime" name="duetime" id="duetime" class="border-gray-200 rounded w-full text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" type="time">
                                             </div>
                                         </div>
                                     </div>
@@ -464,6 +472,38 @@ const onDeleteItem = () => {
                                   <span class="block text-gray-500 md:text-left mb-1 md:mb-0 px-6 py-2">
                                     {{ store.detail }} 
                                   </span>
+                                </div>
+                              </div>
+                        </div>
+                    </Modal>
+
+                    <!-- OK dialog -->
+                    <Modal :show="store.openOKModal" @close="closeOKModal">
+                        <div class="">
+                            <div class="md:flex md:items-center px-6 py-3">
+                                <div class="md:w-1/3">
+                                    
+                                </div>
+                                <div class="md:w-2/3 text-gray-500 ">
+                                    <button @click="closeOKModal" class="float-right">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                          </svg>
+                                    </button>
+                                </div>
+                              </div>
+                            
+                              <div class="w-full text-center mb-6 items-stretch">
+                                <div class="flex justify-center">
+                                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-24 h-24 text-green-500">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                  </svg>
+                                </div>
+                                <div class="w-full block font-bold text-2xl">
+                                  Success 
+                                </div>
+                                <div class="w-full block">
+                                  Task has been save successfully! 
                                 </div>
                               </div>
                         </div>
