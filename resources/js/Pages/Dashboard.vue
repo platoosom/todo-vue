@@ -223,6 +223,7 @@ const onDeleteItem = () => {
                                         <option value="inprogress">In Progress</option>
                                         <option value="done">Done</option>
                                     </select>
+                                    <div v-if="form.errors.tasktype" class="text-sm text-red-600">{{ form.errors.tasktype }}</div>
                                   </div>
                                 </div>
                                 <div class="md:flex md:items-center mb-6">
@@ -233,6 +234,7 @@ const onDeleteItem = () => {
                                     </div>
                                     <div class="md:w-2/3">
                                         <input v-model="form.company" name="company"  id="company"  class="border-l-rose-500 border-l-4 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" type="text">
+                                        <div v-if="form.errors.company" class="text-sm text-red-600">{{ form.errors.company }}</div>
                                     </div>
                                 </div>
                                 <div class="md:flex md:items-center mb-6">
@@ -243,6 +245,7 @@ const onDeleteItem = () => {
                                   </div>
                                   <div class="md:w-2/3">
                                     <input v-model="form.contact" name="contact" id="contact" class="border-l-rose-500 border-l-4 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"  type="text">
+                                    <div v-if="form.errors.contact" class="text-sm text-red-600">{{ form.errors.contact }}</div>
                                   </div>
                                 </div>
                                 <div class="md:flex md:items-center mb-6">
@@ -253,6 +256,7 @@ const onDeleteItem = () => {
                                   </div>
                                   <div class="md:w-2/3">
                                     <input v-model="form.subject" name="subject" id="subject" class="border-l-rose-500 border-l-4 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"  type="text">
+                                    <div v-if="form.errors.subject" class="text-sm text-red-600">{{ form.errors.subject }}</div>
                                   </div>
                                 </div>
                                 <div class="md:flex md:items-center mb-6">
@@ -265,6 +269,7 @@ const onDeleteItem = () => {
                                       <select v-model="form.assignto" name="assignto" id="assignto" class="border-l-rose-500 border-l-4 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500">
                                           <option value="4">Administrator</option>
                                       </select>
+                                      <div v-if="form.errors.assignto" class="text-sm text-red-600">{{ form.errors.assignto }}</div>
                                     </div>
                                   </div>
                                   <div class="md:flex md:items-center mb-6">
@@ -281,6 +286,7 @@ const onDeleteItem = () => {
                                             <div class="md:w-1/2 ml-1">
                                                 <input v-model="form.duetime" name="duetime" id="duetime" class="border-gray-200 rounded w-full text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" type="time">
                                             </div>
+                                            <div v-if="form.errors.duedate" class="text-sm text-red-600">{{ form.errors.duedate }}</div>
                                         </div>
                                     </div>
                                   </div>                                  
@@ -313,10 +319,9 @@ const onDeleteItem = () => {
                                           <option value="medium">Medium</option>
                                           <option value="high">High</option>
                                       </select>
+                                      <div v-if="form.errors.priority" class="text-sm text-red-600">{{ form.errors.priority }}</div>
                                     </div>
                                   </div>
-
-
                                 <div class="md:flex md:items-center mb-6">
                                   <div class="md:w-1/3">
                                     <label class="block font-bold md:text-left mb-1 md:mb-0 pr-4" for="detail">

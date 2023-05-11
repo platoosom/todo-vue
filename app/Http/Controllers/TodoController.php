@@ -21,7 +21,7 @@ class TodoController extends Controller
     }
 
 
-    public function create(Request $request)
+    public function create(TodoCreateRequest $request)
     {
         $todo = new Todo();
         $todo->tasktype = $request->tasktype;
