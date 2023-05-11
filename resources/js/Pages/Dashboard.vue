@@ -10,12 +10,15 @@ import Modal from '@/Components/Modal.vue';
  * Props
  */
 const props = defineProps({
-    userType: {
-        type: String,
-    },
     todoes: {
         type: Array,
-    }
+    },
+    currentUser:{
+        type: Object,
+    },
+    users:{
+        type: Object,
+    },
 });
 
 const form = useForm({
@@ -267,7 +270,7 @@ const onDeleteItem = () => {
                                     </div>
                                     <div class="md:w-2/3">
                                       <select v-model="form.assignto" name="assignto" id="assignto" class="border-l-rose-500 border-l-4 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500">
-                                          <option value="4">Administrator</option>
+                                          <option v-for="user in users" :value="user.id" >{{ user.name }}</option>
                                       </select>
                                       <div v-if="form.errors.assignto" class="text-sm text-red-600">{{ form.errors.assignto }}</div>
                                     </div>
