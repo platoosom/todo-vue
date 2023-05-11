@@ -195,13 +195,13 @@ const onDeleteItem = () => {
 
                     <Modal :show="store.openFormModal" @close="closeModal">
                         <div class="">
-                            <div class="md:flex md:items-center px-6 py-3 border-b">
-                                <div class="md:w-1/3">
+                            <div class="flex justify-between px-6 py-3 border-b">
+                                <div>
                                     <h2 class="text-lg font-medium text-gray-900">
                                         Add Task
                                     </h2>
                                 </div>
-                                <div class="md:w-2/3 text-gray-500 ">
+                                <div class="text-gray-500 ">
                                     <button @click="closeModal" class="float-right">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -286,8 +286,8 @@ const onDeleteItem = () => {
                                             <div class="md:w-1/2 ml-1">
                                                 <input v-model="form.duetime" name="duetime" id="duetime" class="border-gray-200 rounded w-full text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" type="time">
                                             </div>
-                                            <div v-if="form.errors.duedate" class="text-sm text-red-600">{{ form.errors.duedate }}</div>
                                         </div>
+                                        <div v-if="form.errors.duedate" class="text-sm text-red-600">{{ form.errors.duedate }}</div>
                                     </div>
                                   </div>                                  
                                   <div class="md:flex md:items-center mb-6">
@@ -355,13 +355,13 @@ const onDeleteItem = () => {
                     <!-- Detail Dialog -->
                     <Modal :show="store.openDetailModal" @close="closeDetailModal">
                         <div class="">
-                            <div class="md:flex md:items-center px-6 py-3 border-b">
-                                <div class="md:w-1/3">
+                            <div class="flex justify-between px-6 py-3 border-b">
+                                <div>
                                     <h2 class="text-lg font-medium text-gray-900">
                                         Task Details 
                                     </h2>
                                 </div>
-                                <div class="md:w-2/3 text-gray-500 ">
+                                <div class="text-gray-500 ">
                                     <button @click="closeDetailModal" class="float-right">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />

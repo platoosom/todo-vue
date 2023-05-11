@@ -23,7 +23,7 @@ class TodoCreateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'tasktype' => ['required', 'string', Rule::in(['todo', 'in-progress', 'done'])],
+            'tasktype' => ['required', 'string', Rule::in(['todo', 'inprogress', 'done'])],
             'company' => ['required', 'string'],
             'contact' => ['required', 'string', 'max:255'],
             'subject' => ['required', 'string', 'max:255'],
