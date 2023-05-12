@@ -23,6 +23,8 @@ const checkedItem = (e) => {
         currentItem.value = 0;
     }
 
+    console.log(currentItem.value) 
+
     emits("checked-item", currentItem)
 };
 
@@ -46,7 +48,9 @@ const checkedItem = (e) => {
             </thead>
             <tbody>
                 <tr v-for="todo in todoes" class="border-b bg-neutral-100 dark:border-neutral-500 dark:bg-neutral-700">
-                    <td class="whitespace-nowrap px-6 py-4 font-medium"><input type="checkbox" :value="todo.id" @change="checkedItem" /></td>
+                    <td class="whitespace-nowrap px-6 py-4 font-medium">
+                        <input :checked="currentItem == todo.id" type="checkbox" :value="todo.id" @change="checkedItem" />
+                    </td>
                     <td class="whitespace-nowrap px-6 py-4 text-gray-500">{{ todo.created_at }}</td>
                     <td class="whitespace-nowrap px-6 py-4 text-red-600">{{ todo.subject }}</td>
                     <td class="whitespace-nowrap px-6 py-4 text-red-600">{{ todo.owner.name }}</td>
