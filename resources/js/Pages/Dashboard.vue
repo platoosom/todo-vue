@@ -5,6 +5,8 @@ import { reactive } from 'vue';
 import TodoList from '@/Components/TodoList.vue';
 import DangerButton from '@/Components/DangerButton.vue';
 import Modal from '@/Components/Modal.vue';
+import moment from 'moment';
+
 
 /**
  * Props
@@ -134,33 +136,34 @@ const fillStore = () => {
     store.contact = todo.contact
     store.subject = todo.subject
     store.assignto = todo.assignto?.id 
-    store.duedate = todo.duedate
-    store.duetime = todo.duetime 
-    store.reminder = todo.reminder
-    store.remindertime = todo.remindertime 
+    store.duedate = moment(todo.duedate).format('DD MMMM YYYY')
+    store.duetime = moment(todo.duedate+' '+todo.duetime).format('HH:mm')
+    store.reminder = todo.reminder? moment(todo.reminder).format('DD MMMM YYYY'):''
+    store.remindertime = todo.reminder? moment(todo.reminder+' '+todo.remindertime).format('HH:mm'):'' 
     store.priority = todo.priority
     store.detail = todo.detail
 }
 
 
 /**
- * Add Item
+ * Submit form (Insert or Update)
  */
-const onInsertItem = () => {
+const onSubmitForm = () => {
+  if(!form.id){
     form.post(route('todo.create'), {
         preserveScroll: true,
         onSuccess: () => {store.openOKModal = true; form.reset();},
         onError: () => {},
     });
+  }else{
+    form.post(route('todo.update'), {
+        preserveScroll: true,
+        onSuccess: () => {store.openOKModal = true; form.reset();},
+        onError: () => {},
+    });
+  }
 }
 
-/**
- * Update Item
- */
-const onUpdateItem = () => {
-
-} 
- 
 
 /**
  * Delete Item event
@@ -249,7 +252,7 @@ const onDeleteItem = () => {
                                 </div>
                               </div>
                             
-                            <form @submit.prevent="onInsertItem" class="w-full p-6">
+                            <form @submit.prevent="onSubmitForm" class="w-full p-6">
                                 <div class="md:flex md:items-center mb-6">
                                   <div class="md:w-1/3">
                                     <label class="block font-bold md:text-left mb-1 md:mb-0 pr-4" for="tasktype">
@@ -387,7 +390,7 @@ const onDeleteItem = () => {
                                     class="ml-3"
                                     :class="{ 'opacity-25': form.processing }"
                                     :disabled="form.processing"
-                                    @click="onInsertItem" >
+                                    @click="onSubmitForm" >
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m6-6H6" />
                                     </svg>
