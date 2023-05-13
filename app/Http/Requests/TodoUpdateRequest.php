@@ -23,16 +23,14 @@ class TodoUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'tasktype' => ['required', 'string', Rule::in(['todo', 'in-progress', 'done'])],
+            'tasktype' => ['required', 'string', Rule::in(['todo', 'inprogress', 'done'])],
             'company' => ['required', 'string'],
             'contact' => ['required', 'string', 'max:255'],
             'subject' => ['required', 'string', 'max:255'],
-            'owner' => ['required', 'integer'],
             'assignto' => ['required', 'integer'],
             'duedate' => ['required', 'date'],
-            'reminder' => ['required', 'date'],
-            'priority' => ['required', 'string', Rule::in(['low', 'medium', 'high'])],
-            'detail' => ['required'],
+            'duetime' => ['required'],
+            'priority' => ['required', 'string', Rule::in(['low', 'medium', 'high'])]
         ];
     }
 }

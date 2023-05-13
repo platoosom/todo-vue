@@ -95,6 +95,7 @@ const closeOKModal = () => {
     store.openFormModal = false;
 };
 const clearForm = () => {
+    form.mode = 'create'
     form.id = null 
     form.tasktype = null 
     form.company = null 
@@ -113,6 +114,7 @@ const fillForm = () => {
     const todo = props.todoes.find( (t) => t.id == id);
 
     // Set store
+    form.mode = 'update'
     form.id = todo.id
     form.tasktype = todo.tasktype
     form.company = todo.company
@@ -149,14 +151,14 @@ const fillStore = () => {
  * Submit form (Insert or Update)
  */
 const onSubmitForm = () => {
-  if(!form.id){
+  if(form.mode == 'create'){
     form.post(route('todo.create'), {
         preserveScroll: true,
         onSuccess: () => {store.openOKModal = true; form.reset();},
         onError: () => {},
     });
   }else{
-    form.post(route('todo.update'), {
+    form.patch(route('todo.update'), {
         preserveScroll: true,
         onSuccess: () => {store.openOKModal = true; form.reset();},
         onError: () => {},
@@ -191,7 +193,7 @@ const onDeleteItem = () => {
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">Todo Lists</h2>
         </template>
        
-        <div class="py-12"> {{  todoes }}
+        <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm ">
                     <div class="p-6 text-gray-900">
@@ -227,9 +229,9 @@ const onDeleteItem = () => {
                         <div class="flex flex-col">
                             <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
                                 <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
-                                    <TodoList @checked-item="onCheckedItem" :todoes="todoes.filter(todo => todo.tasktype === 'todo')" title="To Do" /> 
-                                    <TodoList @checked-item="onCheckedItem" :todoes="todoes.filter(todo => todo.tasktype === 'inprogress')" title="In Progress" /> 
-                                    <TodoList @checked-item="onCheckedItem" :todoes="todoes.filter(todo => todo.tasktype === 'done')" title="Done" /> 
+                                    <TodoList :currentuser="currentUser" @checked-item="onCheckedItem" :todoes="todoes.filter(todo => todo.tasktype === 'todo')" title="To Do" /> 
+                                    <TodoList :currentuser="currentUser" @checked-item="onCheckedItem" :todoes="todoes.filter(todo => todo.tasktype === 'inprogress')" title="In Progress" /> 
+                                    <TodoList :currentuser="currentUser" @checked-item="onCheckedItem" :todoes="todoes.filter(todo => todo.tasktype === 'done')" title="Done" /> 
                                 </div>
                             </div>
                         </div>
@@ -387,15 +389,15 @@ const onDeleteItem = () => {
                                   <div class="md:w-1/3"></div>
                                   <div class="md:w-2/3">
                                     <DangerButton
-                                    class="ml-3"
-                                    :class="{ 'opacity-25': form.processing }"
-                                    :disabled="form.processing"
-                                    @click="onSubmitForm" >
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m6-6H6" />
-                                    </svg>
-                                    Add Task
-                                </DangerButton>
+                                      class="ml-3"
+                                      :class="{ 'opacity-25': form.processing }"
+                                      :disabled="form.processing"
+                                      @click="onSubmitForm" >
+                                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                          <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m6-6H6" />
+                                      </svg>
+                                      Add Task
+                                    </DangerButton>
                                   </div>
                                 </div>
                               </form>

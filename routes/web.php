@@ -36,6 +36,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     
     Route::post('/todo', [TodoController::class, 'create'])->name('todo.create');
+    Route::patch('/todo', [TodoController::class, 'update'])->name('todo.update');
     Route::delete('/todo', [TodoController::class, 'destroy'])->name('todo.destroy');
 
 });

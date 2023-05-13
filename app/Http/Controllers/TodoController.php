@@ -52,13 +52,15 @@ class TodoController extends Controller
         $todo->subject = $request->subject;
         $todo->assignto = $request->assignto;
         $todo->duedate = $request->duedate;
+        $todo->duetime = $request->duetime;
         $todo->reminder = $request->reminder;
+        $todo->remindertime = $request->remindertime;
         $todo->priority = $request->priority;
         $todo->detail = $request->detail;
 
         $todo->save();
 
-        return $request->id;
+        return Redirect::route('dashboard');
     }
 
 
