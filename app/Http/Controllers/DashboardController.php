@@ -14,7 +14,7 @@ class DashboardController extends Controller
         return Inertia::render('Dashboard',[
             'currentUser' => Auth()->user(),
             'todoes' => Todo::all(), 
-            'users' => User::where('id', '!=', Auth()->user()->id)->get(),
+            'users' => User::all(),
         ]);
     }
 }

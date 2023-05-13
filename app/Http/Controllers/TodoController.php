@@ -46,6 +46,10 @@ class TodoController extends Controller
     {
         $todo = Todo::find($request->id);
 
+        if(Auth()->user()->usertype != 'admin' && $todo->owner != Auth()->user()->id && $todo->assignto != Auth()->user()->id){
+            return Redirect::route('dashboard');
+        }
+
         $todo->tasktype = $request->tasktype;
         $todo->company = $request->company;
         $todo->contact = $request->contact;
