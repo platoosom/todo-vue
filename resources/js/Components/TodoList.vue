@@ -52,7 +52,7 @@ const checkedItem = (e) => {
             <tbody>
                 <tr v-for="todo in todoes" class="border-b bg-neutral-100 dark:border-neutral-500 dark:bg-neutral-700">
                     <td class="whitespace-nowrap px-6 py-4 font-medium"> 
-                        <input :disabled="(currentuser.usertype != 'admin' && todo.owner.id != currentuser.id && todo.assignto.id != currentuser.id)" :checked="currentItem == todo.id" type="checkbox" :value="todo.id" @change="checkedItem" class="disabled:cursor-not-allowed disabled:border-gray-100" />
+                        <input type="checkbox" :value="todo.id" @change="checkedItem" class="disabled:cursor-not-allowed disabled:border-gray-100" />
                     </td>
                     <td class="whitespace-nowrap px-6 py-4 text-gray-500">{{ todo.created_at }}</td>
                     <td class="whitespace-nowrap px-6 py-4 text-red-600">{{ todo.subject }}</td>

@@ -389,16 +389,19 @@ const onDeleteItem = () => {
                                   <div class="md:w-1/3"></div>
                                   <div class="md:w-2/3">
                                     <DangerButton
-                                      class="ml-3"
+                                      v-if="form.mode == 'create'"
+                                      @disabled="form.processing || (currentUser.usertype != 'admin' || todo.owner.id != currentUser.id || todo.assignto.id != currentUser.id)"
                                       :class="{ 'opacity-25': form.processing }"
-                                      :disabled="form.processing"
                                       @click="onSubmitForm" >
-                                      <span v-if="form.mode == 'create'">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m6-6H6" />
-                                        </svg>
-                                        Add Task
-                                      </span>
+                                        </svg>Add Task
+                                    </DangerButton>
+                                    <DangerButton
+                                      v-if="form.mode == 'update'"
+                                      @disabled="form.processing || (currentUser.usertype != 'admin' || todo.owner.id != currentUser.id || todo.assignto.id != currentUser.id)"
+                                      :class="{ 'opacity-25': form.processing }"
+                                      @click="onSubmitForm" >
                                       <span v-if="form.mode == 'update'">Update Task</span>
                                     </DangerButton>
                                   </div>
