@@ -81,6 +81,7 @@ const closeModal = () => {
 };
 const openUpdatedFormModal = () => {
     fillForm();
+    fillStore();
     store.openFormModal = true;
 };
 const openDetailModal = () => {
@@ -154,13 +155,13 @@ const onSubmitForm = () => {
   if(form.mode == 'create'){
     form.post(route('todo.create'), {
         preserveScroll: true,
-        onSuccess: () => {store.openOKModal = true; form.reset();},
+        onSuccess: () => {store.openOKModal = true; form.reset(); store.checkedItem = null;},
         onError: () => {},
     });
   }else{
     form.patch(route('todo.update'), {
         preserveScroll: true,
-        onSuccess: () => {store.openOKModal = true; form.reset();},
+        onSuccess: () => {store.openOKModal = true; form.reset(); store.checkedItem = null;},
         onError: () => {},
     });
   }
@@ -390,7 +391,7 @@ const onDeleteItem = () => {
                                   <div class="md:w-2/3">
                                     <DangerButton
                                       v-if="form.mode == 'create'"
-                                      @disabled="form.processing || (currentUser.usertype != 'admin' || todo.owner.id != currentUser.id || todo.assignto.id != currentUser.id)"
+                                      @disabled="form.processing"
                                       :class="{ 'opacity-25': form.processing }"
                                       @click="onSubmitForm" >
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -398,8 +399,8 @@ const onDeleteItem = () => {
                                         </svg>Add Task
                                     </DangerButton>
                                     <DangerButton
-                                      v-if="form.mode == 'update'"
-                                      @disabled="form.processing || (currentUser.usertype != 'admin' || todo.owner.id != currentUser.id || todo.assignto.id != currentUser.id)"
+                                      v-if="form.mode == 'update' && (currentUser.usertype == 'admin' || store.owner == currentUser.id || store.assignto == currentUser.id)"
+                                      @disabled="form.processing"
                                       :class="{ 'opacity-25': form.processing }"
                                       @click="onSubmitForm" >
                                       <span v-if="form.mode == 'update'">Update Task</span>
