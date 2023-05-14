@@ -57,6 +57,8 @@ class TodoController extends Controller
             return Redirect::route('dashboard');
         }
 
+        $oldAssignTo = $todo->assignto;
+
         $todo->tasktype = $request->tasktype;
         $todo->company = $request->company;
         $todo->contact = $request->contact;
@@ -70,6 +72,19 @@ class TodoController extends Controller
         $todo->detail = $request->detail;
 
         $todo->save();
+
+        /**
+        if($oldAssignTo != $request->assignto){
+            $user = User::find($request->assignto);
+            Mail::to($user->email)->send(new TaskMail($todo));
+        }
+        if($todo->tasktype == 'done'){
+            $users = User::where('usertype', '=', 'admin')->get();
+            foreach($users as $user ){
+                Mail::to($user->email)->send(new TaskMail($todo));
+            }
+        }
+        */
 
         return Redirect::route('dashboard');
     }
