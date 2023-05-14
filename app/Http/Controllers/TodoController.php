@@ -93,6 +93,10 @@ class TodoController extends Controller
 
     public function destroy(TodoDestroyRequest $request)
     {
+        if(Auth()->user()->usertype != 'admin'){
+            return Redirect::route('dashboard');
+        }
+
        Todo::destroy($request->id);
        return Redirect::route('dashboard');
     }
