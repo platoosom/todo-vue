@@ -229,9 +229,9 @@ const onDeleteItem = () => {
                         <div class="flex flex-col">
                             <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
                                 <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
-                                    <TodoList :currentuser="currentUser" @checked-item="onCheckedItem" :todoes="todoes.filter(todo => todo.tasktype === 'todo')" title="To Do" /> 
-                                    <TodoList :currentuser="currentUser" @checked-item="onCheckedItem" :todoes="todoes.filter(todo => todo.tasktype === 'inprogress')" title="In Progress" /> 
-                                    <TodoList :currentuser="currentUser" @checked-item="onCheckedItem" :todoes="todoes.filter(todo => todo.tasktype === 'done')" title="Done" /> 
+                                    <TodoList :currentItem="store.checkedItem" :currentuser="currentUser" @checked-item="onCheckedItem" :todoes="todoes.filter(todo => todo.tasktype === 'todo')" title="To Do" /> 
+                                    <TodoList :currentItem="store.checkedItem" :currentuser="currentUser" @checked-item="onCheckedItem" :todoes="todoes.filter(todo => todo.tasktype === 'inprogress')" title="In Progress" /> 
+                                    <TodoList :currentItem="store.checkedItem" :currentuser="currentUser" @checked-item="onCheckedItem" :todoes="todoes.filter(todo => todo.tasktype === 'done')" title="Done" /> 
                                 </div>
                             </div>
                         </div>
