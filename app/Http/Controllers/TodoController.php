@@ -41,9 +41,10 @@ class TodoController extends Controller
         $todo->detail = $request->detail;
         $todo->save();
 
-        $user = User::where('id', $request->assignto)->first();
-        
-        Mail::to($user->email)->send(new TaskMail($todo));
+        /**
+         $user = User::where('id', $request->assignto)->first();
+         Mail::to($user->email)->send(new TaskMail($todo));
+         */
 
         return Redirect::route('dashboard');
     }
