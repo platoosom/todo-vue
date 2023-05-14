@@ -3,13 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\Todo;
+use App\Models\User;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use App\Http\Requests\TodoCreateRequest;
 use App\Http\Requests\TodoUpdateRequest;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Requests\TodoDestroyRequest;
-use Illuminate\Support\Facades\Auth;
+use App\Mail\TaskMail;
 
 class TodoController extends Controller
 {
@@ -37,6 +40,10 @@ class TodoController extends Controller
         $todo->priority = $request->priority;
         $todo->detail = $request->detail;
         $todo->save();
+
+        $user = User::where('id', $request->assignto)->first();
+        
+        Mail::to($user->email)->send(new TaskMail($todo));
 
         return Redirect::route('dashboard');
     }
